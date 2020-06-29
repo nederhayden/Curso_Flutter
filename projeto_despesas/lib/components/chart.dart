@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_despesas/components/chart_bar.dart';
-import 'package:projeto_despesas/models/transaction.dart';
 import 'package:intl/intl.dart';
+import '../models/transaction.dart';
+import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
@@ -43,6 +43,7 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
+      margin: EdgeInsets.all(20),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(

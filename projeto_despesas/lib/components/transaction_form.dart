@@ -1,22 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_despesas/components/adaptative_date_picker.dart';
-
 import 'adaptative_button.dart';
-import 'adaptative_textfield.dart';
+import 'adaptative_text_field.dart';
+import 'adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
 
-  TransactionForm(this.onSubmit);
+  TransactionForm(this.onSubmit) {
+    print('Constructor TransactionForm');
+  }
 
   @override
-  _TransactionFormState createState() => _TransactionFormState();
+  _TransactionFormState createState() {
+    print('createState TransactionForm');
+    return _TransactionFormState();
+  }
 }
 
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
+
+  _TransactionFormState() {
+    print('Constructor _TransactionFormState');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('initState() _TransactionFormState');
+  }
+
+  @override
+  void didUpdateWidget(TransactionForm oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('didUpdateWidget() _TransactionFormState');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('dispose() _TransactionFormState');
+  }
 
   _submitForm() {
     final title = _titleController.text;
@@ -31,31 +57,33 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('build() TransactionForm');
     return SingleChildScrollView(
       child: Card(
         elevation: 5,
         child: Padding(
           padding: EdgeInsets.only(
-              top: 10,
-              left: 10,
-              right: 10,
-              bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
           child: Column(
             children: <Widget>[
               AdaptativeTextField(
+                label: 'Título',
                 controller: _titleController,
-                label: 'Titulo',
                 onSubmitted: (_) => _submitForm(),
               ),
               AdaptativeTextField(
+                label: 'Valor (R\$)',
                 controller: _valueController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 onSubmitted: (_) => _submitForm(),
-                label: 'Valor (R\$)',
               ),
               AdaptativeDatePicker(
                 selectedDate: _selectedDate,
-                onDateChange: (newDate) {
+                onDateChanged: (newDate) {
                   setState(() {
                     _selectedDate = newDate;
                   });
@@ -65,11 +93,11 @@ class _TransactionFormState extends State<TransactionForm> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   AdaptativeButton(
-                    label: 'Nova transação',
+                    label: 'Nova Transação',
                     onPressed: _submitForm,
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),

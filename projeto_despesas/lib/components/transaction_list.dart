@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:projeto_despesas/models/transaction.dart';
-
-import 'transaction_item.dart';
+import './transaction_item.dart';
+import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -17,14 +15,14 @@ class TransactionList extends StatelessWidget {
             builder: (ctx, constraints) {
               return Column(
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
-                    'Nenhuma transação cadastrada!',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Nenhuma Transação Cadastrada!',
+                    style: Theme.of(context).textTheme.title,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    height: constraints.maxHeight * .6,
+                    height: constraints.maxHeight * 0.6,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
@@ -39,10 +37,20 @@ class TransactionList extends StatelessWidget {
             itemBuilder: (ctx, index) {
               final tr = transactions[index];
               return TransactionItem(
+                key: GlobalObjectKey(tr),
                 tr: tr,
                 onRemove: onRemove,
               );
             },
           );
+    //   ListView(
+    //   children: transactions.map((tr) {
+    //     return TransactionItem(
+    //       key: ValueKey(tr.id),
+    //       tr: tr,
+    //       onRemove: onRemove,
+    //     );
+    //   }).toList(),
+    // );
   }
 }
