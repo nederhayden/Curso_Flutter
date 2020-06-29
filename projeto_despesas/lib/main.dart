@@ -48,10 +48,11 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>{
   final typePlatform = Platform.isIOS;
   final List<Transaction> _transactions = [];
   bool _showChart = false;
+
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
